@@ -11,10 +11,14 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 import com.example.demo.ModD.Modeldetails;
 import com.example.demo.ModL.ModelLogin;
+import com.example.demo.RepD.RepT;
 import com.example.demo.RepD.RepoD;
 import com.example.demo.RepL.RepoL;
+
+import jakarta.transaction.Transactional;
 
 
 @Service
@@ -25,6 +29,11 @@ public class Ser {
 	
 	@Autowired
 	RepoL repositoryL;
+	
+	@Autowired
+	RepT repositoryT;
+	
+	
 	
 	public String addCustomer(Modeldetails customer)
 	{
@@ -53,7 +62,7 @@ public class Ser {
 	
 	public List<Modeldetails> getProDetails(@RequestParam String field)
 	{
-		return repository.findAll(Sort.by(Direction.DESC,field));
+		return repository.findAll(Sort.by(Direction.ASC,field));
 	}
 
 	public List<Modeldetails> getProwithPag(int offset, int pagesize)
@@ -92,5 +101,66 @@ public class Ser {
 	{
 		return repositoryL.findAll();
 	}
+	
+	//delete query
+	@Transactional
+	public int deleteCustByName(String name)
+	{
+		return repository.deleteCustByName(name);
+	}
+
+	//update query
+	@Transactional
+	public int updateCust(String city,String mname)
+	{
+		return repository.updateCust(city, mname);
+	}
+	
+	
+	//fetch by name start
+    public List<Modeldetails> fetchCustByNamePrefix(String prefix)
+	{
+		return repository.findByNameStartingWith(prefix);
+	}
+    
+    
+    
+	//fetch by name end
+	public List<Modeldetails> fetchCustByNameSuffix(String suffix)
+	{
+		  return repository.findByNameEndingWith(suffix);
+	}
+	
+	
+	
+	
+	
+	
+	//native
+	@Transactional
+	public List<Modeldetails> fetchCustByWeight(String weight)
+	{
+		return repository.fetchCustByWeight(weight);
+	}
+	
+	
+	//select query1
+	public List<Modeldetails> getCustByName(String name,String operation)
+	{
+		return repository.getCustByName(name, operation);
+	}
+	
+	
+	
+	//select query2
+	public List<Modeldetails> getCustByName(String name)
+	{
+		return repository.getCustByName(name);
+	}
+
+	
+	
+	
+
 
 }

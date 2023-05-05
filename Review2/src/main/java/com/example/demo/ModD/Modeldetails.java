@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 public class Modeldetails {
 	@Id
 	private int id;
-	private String cust_name;
+	private String name;
 	private int price;
 	private int rating;
 	private int calories;
@@ -24,11 +24,12 @@ public class Modeldetails {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getCust_name() {
-		return cust_name;
+	
+	public String getName() {
+		return name;
 	}
-	public void setCust_name(String cust_name) {
-		this.cust_name = cust_name;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public int getPrice() {
 		return price;
@@ -78,5 +79,13 @@ public class Modeldetails {
 	public void setAddons(String addons) {
 		this.addons = addons;
 	}
+	@Override
+	public String toString() {
+		return "Modeldetails [id=" + id + ", name=" + name + ", price=" + price + ", rating=" + rating + ", calories="
+				+ calories + ", item_name=" + item_name + ", cusine=" + cusine + ", type=" + type + ", meal=" + meal
+				+ ", addons=" + addons + "]";
+	}
+	
+	
 	
 }

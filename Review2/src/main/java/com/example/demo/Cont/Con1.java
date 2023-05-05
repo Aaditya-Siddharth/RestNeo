@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.example.demo.ModD.Modeldetails;
 import com.example.demo.ModL.ModelLogin;
 import com.example.demo.Ser.Ser;
@@ -96,6 +97,79 @@ public class Con1 {
 		return cusservice.getUser();
 	}
 	
+	
+	
+	
+	//delete
+	@DeleteMapping("/deletemapping1/{name}")
+	public String deleteCustByName(@PathVariable("name") String name)
+	{
+		 int result=cusservice.deleteCustByName(name);
+		 if(result>0)
+			 return "Customer record is deleted";
+		 else
+			 return"No record found";
+	}
+	
+	
+	//update
+	@PutMapping("/updatebyquery/{cusine}/{name}")
+	public String updateCust(@PathVariable ("cusine")String cusine,@PathVariable ("name")String name)
+	{
+		int res=cusservice.updateCust(cusine, name);
+		if(res>0)
+			return "food record updated";
+		else
+			return "Problem occured while updating";
+	}
+
+	//fetchbynamestart
+	@GetMapping("/prefixname")
+	public List<Modeldetails> fetchCustModelByNamePrefix(@RequestParam String prefix)
+	{
+		 return cusservice.fetchCustByNamePrefix(prefix);
+	}
+
+	
+
+	//fetchbtnameend
+	@GetMapping("/Suffixname")
+	public List<Modeldetails>fetchCustByNameSuffix(@RequestParam String suffix)
+	{
+		return cusservice.fetchCustByNameSuffix(suffix);
+	}
+	
+	
+	
+	
+
+	
+	
+	//native
+	@GetMapping("/fetchbyweight/{price}")
+	public List<Modeldetails> fetchCustByWeight(@PathVariable String price){
+		return cusservice.fetchCustByWeight(price);
+	}
+
+
+	//query1
+	@GetMapping("/getCustByName/{name}/{meal}")
+	public List<Modeldetails> getCustByName(@PathVariable String name,@PathVariable String meal)
+	{
+		return cusservice.getCustByName(name, meal);
+	}
+
+
+
+	//query2
+	@GetMapping("/getCustByName/{name}")
+	public List<Modeldetails> getCustByName(@PathVariable String name)
+	{
+		return cusservice.getCustByName(name);
+	}
+
+	
+
 	
 	
 		
